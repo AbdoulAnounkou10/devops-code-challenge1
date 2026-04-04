@@ -64,7 +64,7 @@ resource "aws_lb_target_group" "backend" {
   }
 }
 
-# Frontend Listener - handles all incoming traffic on port 80
+# Frontend Listener - port 80 forwards to frontend
 resource "aws_lb_listener" "frontend" {
   load_balancer_arn = aws_lb.main.arn
   port              = 80
@@ -76,19 +76,14 @@ resource "aws_lb_listener" "frontend" {
   }
 }
 
-# Backend Listener Rule - routes /api/* traffic to backend
-resource "aws_lb_listener_rule" "backend" {
-  listener_arn = aws_lb_listener.frontend.arn
-  priority     = 100
+# Backend Listener - port 8080 forwards directly to backend
+resource "aws_lb_listener" "backend_public" {
+  load_balancer_arn = aws_lb.main.arn
+  port              = 8080
+  protocol          = "HTTP"
 
-  action {
+  default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.backend.arn
-  }
-
-  condition {
-    path_pattern {
-      values = ["/api/*"]
-    }
   }
 }
