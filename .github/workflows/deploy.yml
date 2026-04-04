@@ -6,12 +6,12 @@ on:
       - gitops
 
 env:
-  AWS_REGION: <region-your-project is located>
-  ECR_FRONTEND: <your-account-id>.dkr.ecr.<region>.amazonaws.com/<your-frontend-repo>
-  ECR_BACKEND: <your-account-id>.dkr.ecr.<region>.amazonaws.com/<your-backend-repo>
-  CLUSTER_NAME: <your-ecs-cluster-name>
-  FRONTEND_SVC: <your-frontend-service-name>
-  BACKEND_SVC: <your-backend-service-name>
+  AWS_REGION: us-east-1
+  ECR_FRONTEND: 735045503371.dkr.ecr.us-east-1.amazonaws.com/devops-challenge-frontend
+  ECR_BACKEND: 735045503371.dkr.ecr.us-east-1.amazonaws.com/devops-challenge-backend
+  CLUSTER_NAME: devops-challenge-cluster
+  FRONTEND_SVC: devops-challenge-frontend-service
+  BACKEND_SVC: devops-challenge-backend-service
 
 jobs:
   build-and-deploy:
